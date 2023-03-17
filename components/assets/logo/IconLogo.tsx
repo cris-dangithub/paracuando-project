@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 interface IIconLogo extends React.ComponentPropsWithoutRef<'svg'> {}
 
-export const IconLogo: FC<IIconLogo> = ({ ...svgProps }) => {
+const IconLogo: FC<IIconLogo> = ({ ...svgProps }) => {
   return (
     <svg
       width="62"
@@ -38,3 +38,5 @@ export const IconLogo: FC<IIconLogo> = ({ ...svgProps }) => {
     </svg>
   );
 };
+
+export default IconLogo;
