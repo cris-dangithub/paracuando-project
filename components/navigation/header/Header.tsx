@@ -1,11 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import IconLogo from '../../assets/logo/IconLogo';
 import Plus from '../../assets/svg/Plus';
 
 const Header = () => {
-  const router = useRouter();
-
   return (
     <div className="bg-[#1A1E2E] text-white flex items-center justify-between px-4 sm:px-12 py-4 min-h-[70px] text-sm">
       <Link href="/">

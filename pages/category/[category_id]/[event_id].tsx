@@ -5,7 +5,7 @@ import { NextPageWithLayout } from '../../page';
 const Details: NextPageWithLayout = () => {
   const router = useRouter();
   const { category_id, event_id } = router.query;
-  return <div>category_id/event_id</div>;
+  return <div>{`${category_id}/${event_id}}`}</div>;
 };
 
 export default Details;
