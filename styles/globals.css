@@ -19,6 +19,9 @@
   .app-banner {
     @apply w-screen m-auto relative left-[calc(-50vw_+_50%)];
   }
+  .app-flex-column {
+    @apply flex flex-col;
+  }
   .text-gradient {
     background: rgb(255, 255, 255);
     background: -moz-linear-gradient(
