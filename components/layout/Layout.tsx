@@ -1,5 +1,5 @@
 import React from 'react';
-import { Footer } from '../navigation/footer/Footer';
+import Footer from '../navigation/footer/Footer';
 import Header from '../navigation/header/Header';
 
 interface ILayout {
