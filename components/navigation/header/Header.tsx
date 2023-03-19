@@ -5,12 +5,14 @@ import Plus from '../../assets/svg/Plus';
 const Header = () => {
   return (
     <div className="bg-[#1A1E2E] text-white flex items-center justify-between px-4 sm:px-12 py-4 min-h-[70px] text-sm">
-      <IconLogo />
+      <Link href="/">
+        <IconLogo className="cursor-pointer" />
+      </Link>
       <div className="flex gap-4">
-        <button className="flex gap-2 items-center">
+        <Link className="flex gap-2 items-center" href="/create-event/1">
           <Plus />
           <span className="text-[#1B4DB1] font-medium">Crear publicación</span>
-        </button>
+        </Link>
         <Link href="/log-in" className="font-medium">
           Log In
         </Link>{' '}

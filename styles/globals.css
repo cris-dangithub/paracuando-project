@@ -6,6 +6,10 @@
   html {
     font-family: 'Roboto', sans-serif;
   }
+
+  input {
+    outline: none;
+  }
 }
 
 @layer components {
@@ -18,6 +22,9 @@
 
   .app-banner {
     @apply w-screen m-auto relative left-[calc(-50vw_+_50%)];
+  }
+  .app-flex-column {
+    @apply flex flex-col;
   }
   .text-gradient {
     background: rgb(255, 255, 255);
