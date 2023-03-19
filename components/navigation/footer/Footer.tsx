@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useInputSearch from '../../../lib/hooks/useInputSearch';
-import SearchIcon from '../../assets/svg/Search';
+import SearchIcon from '../../assets/svg/SearchIcon';
 
 export function Footer() {
   const [inputValue, setInputValue] = useState<string>('');
