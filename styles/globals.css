@@ -6,6 +6,10 @@
   html {
     font-family: 'Roboto', sans-serif;
   }
+
+  input {
+    outline: none;
+  }
 }
 
 @layer components {
