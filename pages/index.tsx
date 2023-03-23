@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Logo from '../components/assets/logo/Logo';
 import { Layout } from '../components/layout/Layout';
+import { EventSlider } from '../components/sliders/EventSlider/EventSlider';
+import { eventsMock } from '../lib/data/events.mock';
 import { useCategories } from '../lib/services/categories.services';
 
 import { NextPageWithLayout } from './page';
@@ -37,7 +39,23 @@ const Home: NextPageWithLayout = () => {
         </div>
       </div>
       {/* CONTENIDO */}
-      <div className="bg-red-300 h-[70vh]">CONTENIDO</div>
+      <div className="bg-red-300 flex flex-col gap-3">
+        <EventSlider
+          title={'Populares en Querétaro'}
+          subtitle={'Lo que las personas piden más'}
+          events={eventsMock}
+        />
+        {/* Slider */}
+        {/*  */}
+        {/* map con las cards */}
+        {/*  */}
+
+        {/*
+        eventsMock.map((event, index) => (
+          <CardEvent key={index} event={event} />
+        ))
+        */}
+      </div>
     </div>
   );
 };
