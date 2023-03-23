@@ -17,6 +17,13 @@ module.exports = {
         'app-blue': '#1b4db1',
         'app-yellow': '#f3f243',
         'app-pink': '#ff64bc',
+        'app-black': '#000000',
+        'app-blackLight': '#1a1e2e',
+        'app-grayDark': '#6e6a6c',
+        'app-gray': '#a7A6A7',
+        'app-grayLight': '#d9d9d9',
+        'app-grayLighter': '#f8f7fa',
+        'app-red': '#ef3f47',
       },
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif'],

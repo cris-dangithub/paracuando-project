@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 interface IEventSlider {
   title?: string;
   subtitle?: string;
-  events: [];
+  events: Event[];
 }
 
 export const EventSlider: FC<IEventSlider> = ({ title, subtitle, events }) => {
@@ -45,7 +45,9 @@ export const EventSlider: FC<IEventSlider> = ({ title, subtitle, events }) => {
           }}
         >
           {events?.map((event, index) => (
-            <SwiperSlide key={index}>{index}</SwiperSlide>
+            <SwiperSlide key={index}>
+              <CardEvent key={index} event={event} />
+            </SwiperSlide>
           ))}
           <div className="hidden sm:flex items-center absolute top-0 bottom-0 -right-20 left-auto cursor-pointer">
             <SlideNextButton />
@@ -58,6 +60,8 @@ export const EventSlider: FC<IEventSlider> = ({ title, subtitle, events }) => {
 
 // some-inner-component.jsx
 import { useSwiper } from 'swiper/react';
+import { Event } from '../../../lib/interfaces/events.interface';
+import CardEvent from '../../card/CardEvent';
 
 interface ISlideNextButton {
   className?: string;

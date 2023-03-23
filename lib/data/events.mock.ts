@@ -4,7 +4,7 @@ export const eventsMock = [
     short_description:
       'El concierto con la temática de Lady gaga en Las Vegas. El concierto con la temática de Lady gaga en Las Vegas.El concierto con la temática.',
     votes: 99203,
-    url: 'ladygaga.com',
+    url: 'https://ladygaga.com',
     image: '/mock-event-image.png',
   },
   {
