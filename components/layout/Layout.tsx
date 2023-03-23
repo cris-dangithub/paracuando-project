@@ -11,7 +11,7 @@ export const Layout: React.FC<ILayout> = ({ children }) => {
     <>
       <div className="overflow-x-hidden min-h-screen app-flex-column justify-between">
         <Header />
-        <main className="app-container mt-0 ">{children}</main>
+        <main className="app-container">{children}</main>
         <Footer />
       </div>
     </>

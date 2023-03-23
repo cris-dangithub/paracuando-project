@@ -1,5 +1,6 @@
 export const eventsMock = [
   {
+    id: 1,
     title: 'Concierto de Lady Gaga',
     short_description:
       'El concierto con la temática de Lady gaga en Las Vegas. El concierto con la temática de Lady gaga en Las Vegas.El concierto con la temática.',
@@ -8,6 +9,7 @@ export const eventsMock = [
     image: '/mock-event-image.png',
   },
   {
+    id: 2,
     title: 'Tienda de ropa femenina ZARA',
     short_description:
       'Tienda de ropa para todos los gustos de grandes y chiquitos',
@@ -16,6 +18,7 @@ export const eventsMock = [
     image: '/mock-event-image.png',
   },
   {
+    id: 3,
     title: 'Concierto de BTS',
     short_description: 'Grupo de música coreano',
     votes: 99203,

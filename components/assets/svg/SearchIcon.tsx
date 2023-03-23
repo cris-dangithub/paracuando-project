@@ -1,14 +1,9 @@
-import React from 'react';
-
 interface ISearch extends React.ComponentPropsWithRef<'svg'> {
   isActive: string;
   className?: string;
 }
 
-export const SearchIcon: React.FC<ISearch> = ({
-  isActive = false,
-  className,
-}) => {
+export const SearchIcon: React.FC<ISearch> = ({ isActive, className }) => {
   return (
     <svg
       width="18"

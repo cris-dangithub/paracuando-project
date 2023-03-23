@@ -16,8 +16,20 @@
   .app-container {
     @apply m-auto container p-4 lg:max-w-6xl;
   }
+
   .app-title-1 {
     @apply font-black text-5xl leading-[56px] font-Roboto;
+  }
+  .app-subtitle-1 {
+    @apply font-medium text-[16px] leading-[19px];
+  }
+
+  .app-title-2 {
+    @apply font-medium text-[24px] leading-7;
+  }
+
+  .app-subtitle-2 {
+    @apply text-[16px] leading-[19px];
   }
 
   .app-banner {

@@ -1,23 +1,34 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { Event } from '../../lib/interfaces/events.interface';
 import { Heart } from '../assets/svg/Heart';
+import VotesIconCard from '../assets/svg/VotesIconCard';
 
 interface EventCard {
   event: Event;
 }
 
 const CardEvent: React.FC<EventCard> = ({ event }) => {
-  const [isLoading, setisLoading] = useState<boolean>(true);
-  const handleLike = () => {
-    console.log('HOLA');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const router = useRouter();
+  const handleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsFavorite(!isFavorite);
+  };
+  const handleDetails = () => {
+    router.push(`/details/${event.id}`);
   };
 
   return (
-    <div className="bg-cyan-300 relative w-72 !h-[450px] overflow-hidden rounded-2xl">
+    <div
+      onClick={handleDetails}
+      className="bg-white relative w-full !h-[450px] overflow-hidden rounded-2xl select-none shadow-app-card"
+    >
       <button className="absolute right-6 top-52" onClick={handleLike}>
-        <Heart isActive={false} />
+        <Heart isActive={isFavorite} />
         {/* {liked ? 'Te gusta este evento' : 'Me gusta'} */}
       </button>
       <div className="w-full h-60 flex justify-center items-center">
@@ -33,15 +44,26 @@ const CardEvent: React.FC<EventCard> = ({ event }) => {
           'Loading'
         )}
       </div>
-      <div className="py-4 px-6">
-        <div>
-          <h2 className="text-xl font-semibold ">{event.title}</h2>
-          <p className="text-[14.5px]">{event.short_description}</p>
+      <div className="py-4 px-6 flex flex-col">
+        <div className="flex flex-col gap-1 h-28 overflow-hidden relative">
+          <h2 className="text-xl font-semibold text-app-blackLight">
+            {event.title}
+          </h2>
+          <p className="text-[14.5px] leading-[18px] text-app-grayDark">
+            {event.short_description}
+          </p>
+          <div className="absolute w-full h-full top-0 right-0 text-gradient"></div>
         </div>
-        <Link href={event.url} target="_blank">
-          {event.url}
+        <Link
+          href={event.url}
+          target="_blank"
+          className="mt-1 font-medium text-app-blue"
+        >
+          {event.url.replace('https://', '')}
         </Link>
-        <span>{event.votes} votes</span>
+        <span className="flex gap-2 mt-3">
+          <VotesIconCard /> {event.votes} votes
+        </span>
       </div>
     </div>
   );

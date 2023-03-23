@@ -39,22 +39,12 @@ const Home: NextPageWithLayout = () => {
         </div>
       </div>
       {/* CONTENIDO */}
-      <div className="bg-red-300 flex flex-col gap-3">
+      <div className="bg-red-300 bg-white flex flex-col gap-3">
         <EventSlider
           title={'Populares en Querétaro'}
           subtitle={'Lo que las personas piden más'}
           events={eventsMock}
         />
-        {/* Slider */}
-        {/*  */}
-        {/* map con las cards */}
-        {/*  */}
-
-        {/*
-        eventsMock.map((event, index) => (
-          <CardEvent key={index} event={event} />
-        ))
-        */}
       </div>
     </div>
   );
