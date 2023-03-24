@@ -22,7 +22,7 @@ const AuthLayout: React.FC<IAuthLayout> = ({ children }) => {
       </div>
       <section className="flex items-center justify-center z-10 md:w-1/2 ">
         <div
-          className="max-w-[220px] min-w-[120px] w-1/4 md:w-1/2"
+          className="max-w-[300px] min-w-[120px] w-1/4 md:w-1/2"
           onClick={() => router.push('/')}
         >
           <Logo variant="yellow" className="w-full cursor-pointer" />
