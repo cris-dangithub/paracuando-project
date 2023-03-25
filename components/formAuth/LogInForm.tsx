@@ -1,27 +1,46 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { ILogin } from '../../lib/interfaces/auth.interface';
-
+import {
+  checkEmail,
+  checkExistsPassword,
+} from '../../lib/helpers/checkers.helper';
+import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
 
 const LogInForm = () => {
   const { handleSubmit, register } = useForm<ILogin>();
+  const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
+  const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');
 
-  const checkEmail = (email: string) => {
-    if (email.split('@').length !== 2) return false;
-    return true;
+  const handleErrEmail = (email: string): void => {
+    if (!email) return setIsErrEmail('');
+    checkEmail(email) ? setIsErrEmail('success') : setIsErrEmail('error');
   };
-  const checkPassword = (pss: string) => {
-    // Contraseña correcta o incorrecta (dependiendo de la respuesta del servidor)
-    //...
+
+  const handleErrPassword = (password: string): void => {
+    if (!password) return setIsErrPass('');
+    checkExistsPassword(password)
+      ? setIsErrPass('success')
+      : setIsErrPass('error');
+  };
+
+  const handleMessageErrorEmail = (): JSX.Element => {
+    if (!isErrEmail || isErrEmail !== 'error') return <></>;
+    return (
+      <ul className="list-disc text-xs pl-5">
+        <li>Esta cuenta no corresponde a ningun usuario</li>
+      </ul>
+    );
   };
 
   const Submit = handleSubmit((data: ILogin) => {
     console.log(data);
     const { email, password } = data;
-    console.log(checkEmail(email));
-    console.log(checkPassword(password));
+    console.log(email);
+    handleErrEmail(email);
+    handleErrPassword(password);
   });
 
   return (
@@ -32,7 +51,9 @@ const LogInForm = () => {
         label="Email"
         register={register}
         placeholder="ejemplo@mail.com"
+        statusErrEmail={isErrEmail}
       />
+      {handleMessageErrorEmail()}
       <Field
         name="password"
         type="password"
