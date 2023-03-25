@@ -57,4 +57,23 @@
     );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#29b519",GradientType=1);
   }
+
+  .overlay-gradient-mobile {
+    background: linear-gradient(
+      to right,
+      #000000fc 0%,
+      #000000f0 10%,
+      #000000af 50%,
+      #ffffff00
+    );
+  }
+
+  .overlay-gradient-desktop {
+    background: linear-gradient(
+      to right,
+      #000000ed 0%,
+      #0000008e 50%,
+      #ffffff00
+    );
+  }
 }
