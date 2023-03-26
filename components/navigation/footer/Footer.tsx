@@ -11,7 +11,7 @@ export function Footer() {
   };
 
   return (
-    <div className="w-full bg-[url('/footer-banner-mobile.jpg')] h-[480px] bg-center bg-no-repeat bg-cover flex justify-center items-center p-6">
+    <div className="w-full bg-[url('/footer-banner-mobile.jpg')] h-[480px] bg-center bg-no-repeat bg-cover flex justify-center items-center p-6 sm:bg-[url('/footer-banner.png')]">
       <form className="w-full max-w-md" onSubmit={handleSubmit}>
         <div className="mt-40 relative">
           <input
