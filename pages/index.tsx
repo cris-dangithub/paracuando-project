@@ -74,20 +74,20 @@ const Home: NextPageWithLayout = () => {
 
       {/* BUTTONS CUADRO*/}
 
-      <div className="min-h-[250px] bg-slate-100 ">
+      <div className="min-h-[250px] bg-slate-100 w-941">
         <div>
-          <p className="text-[24px] leading-[28.13px] text-base font-Roboto font-medium left-56 w-96 text-app-grayDark">
+          <p className="text-[24px] leading-[28.13px] py-6 px-8 text-base font-Roboto font-medium left-56 w-373px text-app-grayDark">
             ¡Hagamoslo más personal!
           </p>
-          <p className="text-[16px] leading-[18.75px] text-base font-Roboto font-normal left-56 text-app-grayDark">
+          <p className="text-[16px] leading-[18.75px] text-base font-Roboto py-1 px-8 font-normal left-56 text-app-grayDark">
             Selecciona tus interes para brindarte sugerencia de acuerdo a tus
             gustos
           </p>
         </div>
-        <div className="flex items-center justify-center mt-4 gap-10">
+        <div className="flex items-center justify-center py-2 mt-4 gap-10">
           <Link href={'/category/marcas-y-tiendas'}>
             <button
-              className="bg-white text-slate-300 font-size py-2 px-4 rounded-3xl w-full sm:w-465px"
+              className="bg-white hover:bg-blue text-slate-300 font-size py-2 px-4 rounded-3xl w-full sm:w-465px"
               type="button"
             >
               Restaurantes
@@ -110,6 +110,11 @@ const Home: NextPageWithLayout = () => {
             </button>
           </Link>
         </div>
+        <Link href={'/category/marcas-y-tiendas'}>
+          <button className="text-[16px] py-10 px-10 leading-[18.75px] text-base font-Roboto font-normal left-56 text-app-grayDark">
+            Ver todos los intereses
+          </button>
+        </Link>
       </div>
 
       {/* RECIENTES */}
