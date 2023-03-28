@@ -76,4 +76,8 @@
       #ffffff00
     );
   }
+
+  .overlay-gradient-category-card {
+    background: linear-gradient(#1f1e1e00 0%, #1f1e1e8a 61%);
+  }
 }
