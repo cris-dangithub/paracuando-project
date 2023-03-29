@@ -16,8 +16,20 @@
   .app-container {
     @apply m-auto container p-4 lg:max-w-6xl;
   }
+
   .app-title-1 {
     @apply font-black text-5xl leading-[56px] font-Roboto;
+  }
+  .app-subtitle-1 {
+    @apply font-medium text-[16px] leading-[19px];
+  }
+
+  .app-title-2 {
+    @apply font-medium text-[24px] leading-7;
+  }
+
+  .app-subtitle-2 {
+    @apply text-[16px] leading-[19px];
   }
 
   .app-banner {
@@ -44,5 +56,28 @@
       rgba(41, 181, 25, 0) 52%
     );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#29b519",GradientType=1);
+  }
+
+  .overlay-gradient-mobile {
+    background: linear-gradient(
+      to right,
+      #000000fc 0%,
+      #000000f0 10%,
+      #000000af 50%,
+      #ffffff00
+    );
+  }
+
+  .overlay-gradient-desktop {
+    background: linear-gradient(
+      to right,
+      #000000ed 0%,
+      #0000008e 50%,
+      #ffffff00
+    );
+  }
+
+  .overlay-gradient-category-card {
+    background: linear-gradient(#1f1e1e00 0%, #1f1e1e8a 61%);
   }
 }
