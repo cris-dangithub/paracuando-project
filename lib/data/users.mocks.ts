@@ -5,5 +5,6 @@ export const users = [
     lastname: 'Muñoz',
     email: 'cristiandaniel@gmail.com',
     password: 'cris123456789',
+    interest: '1, 2',
   },
 ];

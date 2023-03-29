@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
 import { useForm, UseFormRegister } from 'react-hook-form';
 import Plus from '../../components/assets/svg/Plus';
 import CategoryCard from '../../components/categories/CategoryCard';
 import { ConfigLayout } from '../../components/layout/ConfigLayout';
+import { users } from '../../lib/data/users.mocks';
+import { CategoryMock } from '../../lib/interfaces/categories.interface';
 import { NextPageWithLayout } from '../page';
 
 type keysFormData = 'profilePicture' | 'firstname' | 'lastname' | 'interests';
@@ -39,6 +42,48 @@ const Input: React.FC<InputData> = (props) => {
 };
 
 const ConfigPage: NextPageWithLayout = () => {
+  const [user, setUser] = useState(users[0]);
+  const [userInterests, setUserInterests] = useState<string[]>();
+
+  const getInterests = (userInterests: string) => {
+    const arrInterests = userInterests.split(', ');
+    const result = [];
+
+    for (let i = 0; i < 3; i++) {
+      const interest = arrInterests[i];
+      if (interest) result.push(interest);
+      else result.push('');
+    }
+    return result;
+  };
+
+  const updateInterests = (category?: CategoryMock) => {
+    if (category && userInterests) {
+      const newInterests = [...userInterests];
+      const newUser = { ...user };
+      const index = newInterests.findIndex(
+        (interest) => +interest === category.id
+      );
+      newInterests.splice(index, 1, '');
+      newUser.interest = newInterests.reduce((acc, el) => {
+        if (el && !acc) {
+          return `${el}`;
+        }
+        if (el && acc) {
+          return `${acc}, ${el}`;
+        }
+        return acc;
+      }, '');
+      setUser(newUser);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      setUserInterests(getInterests(user.interest));
+    }
+  }, [user]);
+
   const { handleSubmit, register } = useForm({
     defaultValues: {
       profilePicture: '',
@@ -48,7 +93,6 @@ const ConfigPage: NextPageWithLayout = () => {
     },
   });
   const handleClick = () => {
-    console.log('first');
     const inputFile = document.getElementById('profilePicture');
     inputFile?.click();
   };
@@ -104,8 +148,14 @@ const ConfigPage: NextPageWithLayout = () => {
             Mis intereses
           </h2>
           <div className="grid auto-rows-[150px] gap-5 sm:grid-cols-2 md:grid-cols-3">
-            <CategoryCard categoryName="Ropa y accesorios" />
-            <CategoryCard />
+            {userInterests &&
+              userInterests.map((interest, index) => (
+                <CategoryCard
+                  key={index}
+                  categoryId={+interest}
+                  handleClick={updateInterests}
+                />
+              ))}
           </div>
         </section>
         <button className="mt-10 mb-20 self-center py-3 px-6 bg-app-blue text-white font-semibold rounded-full">
