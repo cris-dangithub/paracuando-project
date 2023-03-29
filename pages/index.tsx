@@ -98,7 +98,7 @@ const Home: NextPageWithLayout = () => {
               className="bg-white text-slate-300 font-size py-2 px-4 rounded-3xl w-full sm:w-465px"
               type="button"
             >
-              Tiendas de ropa
+              Tiendas de ropas
             </button>
           </Link>
           <Link href={'/category/artistas-y-conciertos'}>
