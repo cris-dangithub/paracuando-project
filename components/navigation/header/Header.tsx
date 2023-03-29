@@ -9,7 +9,7 @@ const Header = () => {
         <IconLogo className="cursor-pointer" />
       </Link>
       <div className="flex gap-4">
-        <Link className="flex gap-2 items-center" href="/create-event/1">
+        <Link className="flex gap-2 items-center" href="/create-event/">
           <Plus />
           <span className="text-[#1B4DB1] font-medium">Crear publicación</span>
         </Link>
