@@ -88,6 +88,7 @@ const ConfigPage: NextPageWithLayout = () => {
                 Agrega una foto para tu perfil
               </label>
             </div>
+
             <div className="app-flex-column gap-9 md:justify-center md:gap-14 md:flex-1">
               <Input
                 label="First Name"
