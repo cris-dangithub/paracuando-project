@@ -9,7 +9,11 @@ import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
 
-const LogInForm = () => {
+interface ILoginForm {
+  type?: 'login' | 'loginPopUp';
+}
+
+const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
   const { handleSubmit, register } = useForm<ILogin>();
   const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
   const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');

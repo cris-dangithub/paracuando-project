@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import Logo from '../components/assets/logo/Logo';
 import { Layout } from '../components/layout/Layout';
+import PopUp from '../components/popup/PopUp';
 import { EventSlider } from '../components/sliders/EventSlider/EventSlider';
 import { eventsMock } from '../lib/data/events.mock';
 import { useCategories } from '../lib/services/categories.services';
@@ -8,12 +10,15 @@ import { useCategories } from '../lib/services/categories.services';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
+  const [popUpShowed, setPopUpShowed] = useState(true);
   const { data, error, isLoading } = useCategories();
 
   console.log({ data, error, isLoading });
 
   return (
     <div>
+      {/* PopUps */}
+      {popUpShowed && <PopUp setPopUpShowed={setPopUpShowed} />}
       {/* HERO SECTION */}
       <div className='min-h-[488px] flex justify-center items-center flex-col bg-[url("/home.png")] bg-cover bg-center app-banner -mt-4 gap-5'>
         <div>

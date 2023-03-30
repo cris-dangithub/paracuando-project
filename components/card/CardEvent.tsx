@@ -13,10 +13,16 @@ interface EventCard {
 const CardEvent: React.FC<EventCard> = ({ event }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
   const router = useRouter();
   const handleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    // Valid if user logged (popup if not) -> Hacer uso de estados globales
+    if (isLogged) {
+      setIsFavorite(!isFavorite);
+    } else {
+      // logica si falso
+    }
   };
   const handleDetails = () => {
     router.push(`/details/${event.id}`);
