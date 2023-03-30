@@ -7,7 +7,7 @@ const PopUp = () => {
   const { popUpAuth } = useAppSelector((state) => state);
   return (
     <div
-      className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center p-3 bg-black/40 md:items-start md:justify-end md:pt-24 "
+      className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-center justify-center p-3 bg-black/40 md:items-start md:justify-end md:pt-24 md:pr-11 "
       onClick={() => dispatch(toggleVisibility())}
     >
       {popUpAuth.type === 'loginPopUp' && (

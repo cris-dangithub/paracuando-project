@@ -43,7 +43,7 @@ const FormAuthCard: React.FC<IFormAuth> = ({ title, subtitle, type }) => {
 
   const maxWidthCard = () => {
     if (['loginPopUp', 'signUpPopUp', 'chooseOption'].includes(type))
-      return 'max-w-sm backdrop-blur-sm';
+      return '!max-w-sm backdrop-blur-sm';
     return '';
   };
 
