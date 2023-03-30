@@ -2,11 +2,20 @@ import { users } from '../data/users.mocks';
 
 export const checkEmail = (email: string) => {
   //* Checkeo de formato (Frontend)
-  if (email.trim().split('@').length !== 2 || !email.split('@')[1])
+  console.log(email.trim().split('@'));
+  console.log(email.split('@')[1]);
+
+  if (email.trim().split('@').length !== 2 || !email.split('@')[1]) {
+    console.log('entra en el primer if');
     return false;
+  }
+
+  return true;
+};
+
+export const checkEmailExists = (email: string) => {
   //! Checkeo de que el email exista (BACKEND)
   if (!users.find((user) => user.email === email)) return false;
-  //
   return true;
 };
 

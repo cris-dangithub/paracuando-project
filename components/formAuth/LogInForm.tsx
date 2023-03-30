@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
-  checkEmail,
+  checkEmailExists,
   checkExistsPassword,
 } from '../../lib/helpers/checkers.helper';
 import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
@@ -20,7 +20,7 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
 
   const handleErrEmail = (email: string): void => {
     if (!email) return setIsErrEmail('');
-    checkEmail(email) ? setIsErrEmail('success') : setIsErrEmail('error');
+    checkEmailExists(email) ? setIsErrEmail('success') : setIsErrEmail('error');
   };
 
   const handleErrPassword = (password: string): void => {
@@ -76,7 +76,7 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
           </Link>
         </li>
       </ul>
-      <ButtonForm to="sign-up" text="login" />
+      {<ButtonForm to="sign-up" text="login" type={type} />}
     </form>
   );
 };
