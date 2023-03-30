@@ -1,19 +1,25 @@
 import Link from 'next/link';
 import Logo from '../components/assets/logo/Logo';
 import { Layout } from '../components/layout/Layout';
+import PopUp from '../components/popup/PopUp';
 import { EventSlider } from '../components/sliders/EventSlider/EventSlider';
 import { eventsMock } from '../lib/data/events.mock';
 import { useCategories } from '../lib/services/categories.services';
+import { useAppSelector } from '../lib/store/hooks';
 
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
+  const { popUpAuth } = useAppSelector((state) => state);
+  console.log(popUpAuth);
   const { data, error, isLoading } = useCategories();
 
   console.log({ data, error, isLoading });
 
   return (
     <div>
+      {/* PopUps */}
+      {popUpAuth.isActive && <PopUp />}
       {/* HERO SECTION */}
       <div className='min-h-[488px] flex justify-center items-center flex-col bg-[url("/home.png")] bg-cover bg-center app-banner -mt-4 gap-5'>
         <div>
@@ -62,7 +68,6 @@ const Home: NextPageWithLayout = () => {
           events={eventsMock}
         />
       </div>
-
       {/* SUGGESTION */}
       <div className=" bg-white flex flex-col mt-4 gap-3">
         <EventSlider
@@ -71,9 +76,7 @@ const Home: NextPageWithLayout = () => {
           events={eventsMock}
         />
       </div>
-
       {/* BUTTONS CUADRO*/}
-
       <div className="min-h-[250px] bg-slate-100 w-941">
         <div>
           <p className="text-[24px] leading-[28.13px] py-6 px-8 text-base font-Roboto font-medium left-56 w-373px text-app-grayDark">
@@ -116,7 +119,6 @@ const Home: NextPageWithLayout = () => {
           </button>
         </Link>
       </div>
-
       {/* RECIENTES */}
       <div className=" bg-white flex flex-col mt-4 gap-3">
         <EventSlider

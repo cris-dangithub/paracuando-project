@@ -2,21 +2,25 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
-  checkEmail,
+  checkEmailExists,
   checkExistsPassword,
 } from '../../lib/helpers/checkers.helper';
 import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
 
-const LogInForm = () => {
+interface ILoginForm {
+  type?: 'login' | 'loginPopUp';
+}
+
+const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
   const { handleSubmit, register } = useForm<ILogin>();
   const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
   const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');
 
   const handleErrEmail = (email: string): void => {
     if (!email) return setIsErrEmail('');
-    checkEmail(email) ? setIsErrEmail('success') : setIsErrEmail('error');
+    checkEmailExists(email) ? setIsErrEmail('success') : setIsErrEmail('error');
   };
 
   const handleErrPassword = (password: string): void => {
@@ -72,7 +76,7 @@ const LogInForm = () => {
           </Link>
         </li>
       </ul>
-      <ButtonForm to="sign-up" text="login" />
+      {<ButtonForm to="sign-up" text="login" type={type} />}
     </form>
   );
 };

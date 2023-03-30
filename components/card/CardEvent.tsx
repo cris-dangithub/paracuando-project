@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Event } from '../../lib/interfaces/events.interface';
+import { useAppDispatch, useAppSelector } from '../../lib/store/hooks';
+import { toggleVisibility } from '../../lib/store/slices/popUpAuth.slices';
 import { Heart } from '../assets/svg/Heart';
 import VotesIconCard from '../assets/svg/VotesIconCard';
 
@@ -11,12 +13,20 @@ interface EventCard {
 }
 
 const CardEvent: React.FC<EventCard> = ({ event }) => {
+  const dispatch = useAppDispatch();
+  const { popUpAuth } = useAppSelector((state) => state);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
   const router = useRouter();
   const handleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    // Valid if user logged (popup if not) -> Hacer uso de estados globales
+    if (isLogged) {
+      setIsFavorite(!isFavorite);
+    } else {
+      dispatch(toggleVisibility());
+    }
   };
   const handleDetails = () => {
     router.push(`/details/${event.id}`);

@@ -8,7 +8,11 @@ import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
 
-const SignUpForm = () => {
+interface ISignUpForm {
+  type?: 'signup' | 'signUpPopUp';
+}
+
+const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
   const { handleSubmit, register } = useForm<ILogin>();
   const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
   const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');
@@ -80,7 +84,7 @@ const SignUpForm = () => {
       />
       {handleMessageErrorPassword()}
 
-      <ButtonForm to="log-in" text="signup" />
+      <ButtonForm to="log-in" text="signup" type={type} />
     </form>
   );
 };

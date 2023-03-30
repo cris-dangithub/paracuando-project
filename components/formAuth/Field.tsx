@@ -53,6 +53,7 @@ const Field: React.FC<IFields> = (props) => {
       return <SuccessForm />;
     }
     if (statusErrEmail && inputValue) {
+      console.log(statusErrEmail);
       if (statusErrEmail === 'error') return <ErrorForm title={title} />;
       return <SuccessForm />;
     }
@@ -80,6 +81,7 @@ const Field: React.FC<IFields> = (props) => {
           placeholder={placeholder}
           className="w-full p-4 bg-transparent border-2 border-app-grayLight rounded-lg"
           onChange={handleChange}
+          required
         />
         <div className="absolute top-0 right-5 bottom-0 flex items-center gap-2">
           {dynamicPass ? (

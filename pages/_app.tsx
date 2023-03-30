@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app';
+import { Provider } from 'react-redux';
 import { SWRConfig } from 'swr';
 import { fetcher } from '../lib/helpers/fetcher.helper';
+import { store } from '../lib/store';
 import '../styles/globals.css';
 import { NextPageWithLayout } from './page';
 type AppPropsWithLayout = AppProps & {
@@ -19,7 +21,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           fetcher,
         }}
       >
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
+        )}
       </SWRConfig>
     </>
   );
