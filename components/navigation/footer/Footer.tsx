@@ -5,14 +5,14 @@ interface IFooter {
 }
 
 export const Footer: React.FC<IFooter> = ({ disableInput = false }) => {
-  const height = () => {
-    if (disableInput) return '!h-44';
-    return 'h-[480px] ';
+  const variantsIfInput = () => {
+    if (disableInput) return "h-44 bg-[url('/footer-banner.png')]";
+    return "h-[480px] bg-[url('/footer-banner-mobile.jpg')] sm:bg-[url('/footer-banner.png')]";
   };
 
   return (
     <div
-      className={`w-full bg-[url('/footer-banner-mobile.jpg')] bg-center bg-no-repeat bg-cover flex justify-center items-center p-6 sm:bg-[url('/footer-banner.png')] ${height()}`}
+      className={`w-full bg-center bg-no-repeat bg-cover flex justify-center items-center p-6 ${variantsIfInput()}`}
     >
       <div
         className="w-full flex justify-center"
