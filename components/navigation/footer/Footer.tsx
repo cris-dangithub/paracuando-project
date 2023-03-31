@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import useInputSearch from '../../../lib/hooks/useInputSearch';
 import SearchInput from '../../searchInput/SearchInput';
 
 interface IFooter {
@@ -7,13 +5,6 @@ interface IFooter {
 }
 
 export const Footer: React.FC<IFooter> = ({ disableInput = false }) => {
-  const [inputValue, setInputValue] = useState<string>('');
-
-  const { handleSubmit } = useInputSearch();
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
   const height = () => {
     if (disableInput) return '!h-44';
     return 'h-[480px] ';
