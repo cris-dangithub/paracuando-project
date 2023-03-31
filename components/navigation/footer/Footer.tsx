@@ -5,7 +5,7 @@ interface IFooter {
 }
 
 export const Footer: React.FC<IFooter> = ({ disableInput = false }) => {
-  const variantsIfInput = () => {
+  const variantsIfInput = (): string => {
     if (disableInput) return "h-44 bg-[url('/footer-banner.png')]";
     return "h-[480px] bg-[url('/footer-banner-mobile.jpg')] sm:bg-[url('/footer-banner.png')]";
   };
