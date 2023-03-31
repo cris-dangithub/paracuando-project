@@ -14,7 +14,7 @@ export const ConfigLayout: React.FC<IConfigLayout> = ({ children }) => {
           <Header />
           {children}
         </div>
-        <Footer />
+        <Footer disableInput />
       </div>
     </>
   );

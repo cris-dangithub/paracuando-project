@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import useInputSearch from '../../../lib/hooks/useInputSearch';
-import SearchIcon from '../../assets/svg/SearchIcon';
+import SearchInput from '../../searchInput/SearchInput';
 
-export function Footer() {
+interface IFooter {
+  disableInput?: boolean;
+}
+
+export const Footer: React.FC<IFooter> = ({ disableInput = false }) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const { handleSubmit } = useInputSearch();
@@ -10,23 +14,21 @@ export function Footer() {
     setInputValue(e.target.value);
   };
 
+  const height = () => {
+    if (disableInput) return '!h-44';
+    return 'h-[480px] ';
+  };
+
   return (
-    <div className="w-full bg-[url('/footer-banner-mobile.jpg')] h-[480px] bg-center bg-no-repeat bg-cover flex justify-center items-center p-6 sm:bg-[url('/footer-banner.png')]">
-      <form className="w-full max-w-md" onSubmit={handleSubmit}>
-        <div className="mt-40 relative">
-          <input
-            className="text-sm py-3 px-6 w-full rounded-full"
-            type="text"
-            placeholder="¿Qué quieres ver en tu ciudad?"
-            onChange={handleChange}
-            value={inputValue}
-            name="search"
-          />
-          <button className="absolute right-6 top-0 bottom-0 my-auto cursor-pointer outline-none">
-            <SearchIcon isActive={inputValue} />
-          </button>
-        </div>
-      </form>
+    <div
+      className={`w-full bg-[url('/footer-banner-mobile.jpg')] bg-center bg-no-repeat bg-cover flex justify-center items-center p-6 sm:bg-[url('/footer-banner.png')] ${height()}`}
+    >
+      <div
+        className="w-full flex justify-center"
+        style={disableInput ? { display: 'none' } : {}}
+      >
+        <SearchInput />
+      </div>
     </div>
   );
-}
+};
