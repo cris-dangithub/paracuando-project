@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 import {
   checkCreatePassword,
   checkEmail,
 } from '../../lib/helpers/checkers.helper';
 import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
+import { createUser } from '../../lib/services/auth.service';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
 
@@ -16,33 +19,91 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
   const { handleSubmit, register } = useForm<ILogin>();
   const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
   const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');
+  const [errorsForm, setErrorsForm] = useState<any>();
 
-  const handleErrEmail = (email: string): void => {
-    if (!email) return setIsErrEmail('');
-    checkEmail(email) ? setIsErrEmail('success') : setIsErrEmail('error');
+  const router = useRouter();
+
+  const handleErrEmail = (email: string): boolean => {
+    if (!email) {
+      setIsErrEmail('');
+      return false;
+    }
+    if (checkEmail(email)) {
+      setIsErrEmail('success');
+      return true;
+    } else {
+      setIsErrEmail('error');
+      return false;
+    }
   };
-  const handleErrPassword = (password: string): void => {
-    if (!password) return setIsErrPass('');
-    checkCreatePassword(password)
-      ? setIsErrPass('success')
-      : setIsErrPass('error');
+  const handleErrPassword = (password: string): boolean => {
+    if (!password) {
+      setIsErrPass('');
+      return false;
+    }
+    if (checkCreatePassword(password)) {
+      setIsErrPass('success');
+      return true;
+    } else {
+      setIsErrPass('error');
+      return false;
+    }
   };
 
-  const handleMessageErrorPassword = (): JSX.Element => {
-    if (!isErrPass || isErrPass !== 'error') return <></>;
+  const HandleMessageErrEmail = (): JSX.Element => {
+    if (!isErrEmail || isErrEmail !== 'error') return <></>;
     return (
       <ul className="list-disc text-xs pl-5">
-        <li>La contraseña debe tener números, minúsculas y mayúsculas</li>
+        <li>El usuario ya se encuentra registrado</li>
       </ul>
     );
+  };
+  console.log(errorsForm);
+
+  const HandleMessageErrorPassword = (): JSX.Element => {
+    if (!isErrPass || isErrPass !== 'error') return <></>;
+    if (
+      errorsForm &&
+      errorsForm.data.errors[0].message === 'email must be unique'
+    ) {
+      return (
+        <ul className="list-disc text-xs pl-5">
+          <li>La contraseña debe tener números, minúsculas y mayúsculas</li>
+        </ul>
+      );
+    }
+    return <></>;
+  };
+
+  const successSubmit = (data: any) => {
+    Swal.fire({
+      icon: 'success',
+      text: data.results,
+      iconColor: '#f3f243',
+      background: '#1a1e2e',
+    }).then((result) => {
+      router.push('/log-in');
+    });
+  };
+  const errorSubmit = (errResponse: any) => {
+    console.log(errResponse);
+    setIsErrEmail('error');
+    setErrorsForm(errResponse);
+    Swal.fire({
+      icon: 'error',
+      iconColor: '#ef3f47',
+      background: '#1a1e2e',
+    });
   };
 
   const Submit = handleSubmit((data) => {
     console.log(data);
     // Analizar datos
-    const { email, firstname, lastname, password } = data;
-    handleErrEmail(email);
-    handleErrPassword(password);
+    const { email, password } = data;
+    if (!handleErrPassword(password) || !handleErrEmail(email)) return;
+    createUser(data)
+      .then(({ data }) => successSubmit(data))
+      .catch(({ response }) => errorSubmit(response));
   });
 
   return (
@@ -56,16 +117,17 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
         statusErrEmail={isErrEmail}
         onChange={handleErrEmail}
       />
+      <HandleMessageErrEmail />
       <div className="flex w-full gap-2">
         <Field
-          name="firstname"
+          name="first_name"
           type="text"
           label="Nombre"
           register={register}
           placeholder="Erik"
         />
         <Field
-          name="lastname"
+          name="last_name"
           type="text"
           label="Apellido"
           register={register}
@@ -82,7 +144,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
         title="Incorrect format"
         onChange={handleErrPassword}
       />
-      {handleMessageErrorPassword()}
+      <HandleMessageErrorPassword />
 
       <ButtonForm to="log-in" text="signup" type={type} />
     </form>

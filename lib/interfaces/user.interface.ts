@@ -1,10 +1,6 @@
 export interface User {
-  firstName: string;
-  lastName: string;
-  userName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
-  imageUrl: string;
-  codePhone: string;
-  phone: string;
 }
