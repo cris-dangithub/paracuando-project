@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, useForm } from 'react-hook-form';
 import Plus from '../../components/assets/svg/Plus';
 import CategoryCard from '../../components/categories/CategoryCard';
 import { ConfigLayout } from '../../components/layout/ConfigLayout';
@@ -44,6 +45,8 @@ const Input: React.FC<InputData> = (props) => {
 const ConfigPage: NextPageWithLayout = () => {
   const [user, setUser] = useState(users[0]);
   const [userInterests, setUserInterests] = useState<string[]>();
+  const [inputFile, setInputFile] = useState<HTMLInputElement>();
+  const [profileImageURL, setProfileImageURL] = useState<string>();
 
   const getInterests = (userInterests: string) => {
     const arrInterests = userInterests.split(', ');
@@ -77,6 +80,9 @@ const ConfigPage: NextPageWithLayout = () => {
       setUser(newUser);
     }
   };
+  useEffect(() => {
+    setInputFile(document.getElementById('profilePicture') as HTMLInputElement);
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -92,10 +98,16 @@ const ConfigPage: NextPageWithLayout = () => {
       interests: '',
     },
   });
-  const handleClick = () => {
-    const inputFile = document.getElementById('profilePicture');
+
+  const handleImageChange = () => {
+    const files = inputFile?.files;
+    if (!files || !files.length) return;
+    setProfileImageURL(URL.createObjectURL(files[0]));
+  };
+  const handleImageClick = () => {
     inputFile?.click();
   };
+
   const Submit = handleSubmit((data) => {
     console.log(data);
   });
@@ -120,14 +132,28 @@ const ConfigPage: NextPageWithLayout = () => {
 
           <section className="app-flex-column gap-10 md:flex-row md:gap-20 ">
             <div className="app-flex-column items-center gap-4">
-              <input type="file" id="profilePicture" className="hidden" />
-              <button
-                type="button"
-                onClick={handleClick}
-                className="w-56 h-52 bg-app-grayLight rounded-2xl grid place-content-center"
+              <input
+                type="file"
+                id="profilePicture"
+                className="hidden"
+                onChange={handleImageChange}
+              />
+              <div
+                onClick={handleImageClick}
+                className="w-56 h-52 bg-app-grayLight rounded-2xl grid place-content-center cursor-pointer overflow-hidden relative"
               >
-                <Plus />
-              </button>
+                {profileImageURL ? (
+                  <Image
+                    src={profileImageURL}
+                    alt="user profile"
+                    width={250}
+                    height={300}
+                    className="absolute w-full h-full object-cover"
+                  />
+                ) : (
+                  <Plus />
+                )}
+              </div>
               <label htmlFor="profilePicture" className="text-app-grayDark">
                 Agrega una foto para tu perfil
               </label>
