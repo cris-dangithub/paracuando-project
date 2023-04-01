@@ -6,6 +6,7 @@ import { fetcher } from '../lib/helpers/fetcher.helper';
 import { store } from '../lib/store';
 import '../styles/globals.css';
 
+import Init from '../lib/Init';
 import { NextPageWithLayout } from './page';
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -16,19 +17,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <>
-      <SWRConfig
-        value={{
-          shouldRetryOnError: false,
-          revalidateOnFocus: false,
-          fetcher,
-        }}
-      >
-        {getLayout(
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
-        )}
-      </SWRConfig>
+      <Provider store={store}>
+        <Init />
+        <SWRConfig
+          value={{
+            shouldRetryOnError: false,
+            revalidateOnFocus: false,
+            fetcher,
+          }}
+        >
+          {getLayout(<Component {...pageProps} />)}
+        </SWRConfig>
+      </Provider>
     </>
   );
 }

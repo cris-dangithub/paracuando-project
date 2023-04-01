@@ -7,6 +7,7 @@ import {
 } from '../../lib/helpers/checkers.helper';
 import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import { createUser } from '../../lib/services/auth.service';
+import { useAppSelector } from '../../lib/store/hooks';
 import customSwalAlert from '../alerts/swal';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
@@ -22,6 +23,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
   const [errorsForm, setErrorsForm] = useState<any>();
 
   const router = useRouter();
+  const { user } = useAppSelector((state) => state);
 
   const handleErrEmail = (email: string): boolean => {
     if (errorsForm) setErrorsForm('');
@@ -98,6 +100,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
     }
     return <></>;
   };
+
   return (
     <form onSubmit={Submit} className="grid gap-2 mt-6">
       <Field

@@ -1,8 +1,7 @@
-import axios from '../helpers/axios.helper.';
+import axios from 'axios';
 
 import { User, UserCredentials } from '../interfaces/user.interface';
-
-const BASE_URL = 'https://paracuando-academlo-api.academlo.tech/api/v1';
+import { BASE_URL } from './BASE_URL';
 
 const createUser = (user: User) => {
   return axios.post(`${BASE_URL}/auth/sign-up`, user);

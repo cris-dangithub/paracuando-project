@@ -4,15 +4,19 @@ import { Layout } from '../components/layout/Layout';
 import PopUp from '../components/popup/PopUp';
 import { EventSlider } from '../components/sliders/EventSlider/EventSlider';
 import { eventsMock } from '../lib/data/events.mock';
-import { useCategories } from '../lib/services/categories.services';
 import { useAppSelector } from '../lib/store/hooks';
 
+import { usePublications } from '../lib/services/publications.services';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
   const { popUpAuth } = useAppSelector((state) => state);
   console.log(popUpAuth);
-  const { data, error, isLoading } = useCategories();
+  //const { data, error, isLoading } = useCategories();
+  const { data, error, isLoading, mutate } = usePublications();
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
 
   console.log({ data, error, isLoading });
 

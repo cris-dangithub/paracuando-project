@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 import getConfig from 'next/config';
 import Router from 'next/router';
 
@@ -30,6 +30,6 @@ instance.interceptors.request.use(
 export default instance;
 
 async function getTokenFromCookie() {
-  return null;
-  // return Cookie.get('token');
+  //return null;
+  return Cookies.get('token');
 }

@@ -22,7 +22,7 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
   const [isLogging, setIsLogging] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { popUpAuth } = useAppSelector((state) => state);
+  const { popUpAuth, user } = useAppSelector((state) => state);
 
   const HandleMessageErrorEmail = (): JSX.Element => {
     if (isErrEmail === 'error') {
@@ -58,6 +58,7 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
     response.status === 404 ? setIsErrEmail('error') : setIsErrEmail('');
     if (response.status === 401) setIsErrPass('error');
   };
+
   const Submit = handleSubmit((data: ILogin) => {
     loginUser(data)
       .then(({ data }) => successSubmit(data))

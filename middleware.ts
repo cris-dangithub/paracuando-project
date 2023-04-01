@@ -6,10 +6,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  /* const jwt = request.cookies.get('token');
+  const jwt = request.cookies.get('token');
+
   if (!jwt) {
-    return NextResponse.redirect(new URL('/login', request.url));
-  } */
+    return NextResponse.redirect(new URL('/log-in', request.url));
+  }
+
   return NextResponse.next();
 
   // try {

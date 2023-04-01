@@ -7,7 +7,7 @@ const userSlice = createSlice({
   name: 'popUpAuth',
   initialState: null,
   reducers: {
-    setUserGlobal: (state, action: PayloadAction) => action.payload,
+    setUserGlobal: (state, action: PayloadAction<null>) => action.payload,
   },
 });
 
@@ -18,5 +18,5 @@ export default userSlice.reducer;
 export const getGlobalUser = () => (dispatch: AppDispatch) => {
   getUser(getConfig())
     .then(({ data }) => dispatch(setUserGlobal(data.results)))
-    .catch((err) => console.log(err));
+    .catch((err) => dispatch(setUserGlobal(null)));
 };
