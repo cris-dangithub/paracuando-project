@@ -4,14 +4,16 @@ import {
   goToCreateAccount,
   goToLoginAccount,
 } from '../../lib/store/slices/popUpAuth.slices';
+import Spinner from '../loaders/Spinner';
 
 interface AuthRoutes {
   to: 'sign-up' | 'log-in';
   text: 'signup' | 'login';
   type?: 'login' | 'signup' | 'loginPopUp' | 'signUpPopUp' | 'chooseOption';
+  isLogging?: boolean;
 }
 
-const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type }) => {
+const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
   const dispatch = useAppDispatch();
 
   const textBtn = {
@@ -35,10 +37,13 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type }) => {
       }`}
     >
       <button
-        className="py-3 px-5 bg-app-yellow text-black font-semibold text-base rounded-md w-full"
+        className="py-3 px-5 bg-app-yellow text-black font-semibold text-base rounded-md w-full relative"
         {...(type === 'chooseOption' ? btnChooseOptions : {})}
       >
         {textBtn[text]}
+        <div className="absolute top-0 bottom-0 right-0 flex items-center">
+          {isLogging && <Spinner />}
+        </div>
       </button>
 
       {type === 'login' || type === 'signup' ? (

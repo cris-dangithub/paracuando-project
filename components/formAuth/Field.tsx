@@ -79,7 +79,7 @@ const Field: React.FC<IFields> = (props) => {
           id={name}
           {...register(`${name}`)}
           placeholder={placeholder}
-          className="w-full p-4 bg-transparent border-2 border-app-grayLight rounded-lg"
+          className="w-full p-4 bg-transparent border-2 border-app-grayLight rounded-lg autofill:bg-transparent"
           onChange={handleChange}
           required
         />

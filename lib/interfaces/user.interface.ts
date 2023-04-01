@@ -4,3 +4,5 @@ export interface User {
   email: string;
   password: string;
 }
+
+export interface UserCredentials extends Pick<User, 'email' | 'password'> {}

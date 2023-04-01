@@ -1,9 +1,11 @@
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { SWRConfig } from 'swr';
+import '../components/loaders/styles/spinner.css';
 import { fetcher } from '../lib/helpers/fetcher.helper';
 import { store } from '../lib/store';
 import '../styles/globals.css';
+
 import { NextPageWithLayout } from './page';
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
