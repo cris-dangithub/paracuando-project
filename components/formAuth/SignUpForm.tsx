@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
 import {
   checkCreatePassword,
   checkEmail,
 } from '../../lib/helpers/checkers.helper';
 import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import { createUser } from '../../lib/services/auth.service';
+import customSwalAlert from '../alerts/swal';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
 
@@ -24,6 +24,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
   const router = useRouter();
 
   const handleErrEmail = (email: string): boolean => {
+    if (errorsForm) setErrorsForm('');
     if (!email) {
       setIsErrEmail('');
       return false;
@@ -50,54 +51,21 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
     }
   };
 
-  const HandleMessageErrEmail = (): JSX.Element => {
-    if (!isErrEmail || isErrEmail !== 'error') return <></>;
-    return (
-      <ul className="list-disc text-xs pl-5">
-        <li>El usuario ya se encuentra registrado</li>
-      </ul>
-    );
-  };
-  console.log(errorsForm);
-
-  const HandleMessageErrorPassword = (): JSX.Element => {
-    if (!isErrPass || isErrPass !== 'error') return <></>;
-    if (
-      errorsForm &&
-      errorsForm.data.errors[0].message === 'email must be unique'
-    ) {
-      return (
-        <ul className="list-disc text-xs pl-5">
-          <li>La contraseña debe tener números, minúsculas y mayúsculas</li>
-        </ul>
-      );
-    }
-    return <></>;
-  };
-
   const successSubmit = (data: any) => {
-    Swal.fire({
-      icon: 'success',
-      text: data.results,
-      iconColor: '#f3f243',
-      background: '#1a1e2e',
-    }).then((result) => {
+    customSwalAlert({
+      title: data.results,
+      props: { confirmButtonText: 'Login' },
+    }).then((response) => {
       router.push('/log-in');
     });
   };
   const errorSubmit = (errResponse: any) => {
-    console.log(errResponse);
     setIsErrEmail('error');
     setErrorsForm(errResponse);
-    Swal.fire({
-      icon: 'error',
-      iconColor: '#ef3f47',
-      background: '#1a1e2e',
-    });
+    customSwalAlert({ title: 'Error', icon: 'error' });
   };
 
   const Submit = handleSubmit((data) => {
-    console.log(data);
     // Analizar datos
     const { email, password } = data;
     if (!handleErrPassword(password) || !handleErrEmail(email)) return;
@@ -106,6 +74,30 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
       .catch(({ response }) => errorSubmit(response));
   });
 
+  const MessageErrEmail = (): JSX.Element => {
+    if (
+      errorsForm &&
+      errorsForm.data.errors[0].message === 'email must be unique'
+    ) {
+      return (
+        <ul className="list-disc text-xs pl-5">
+          <li>El correo ya se encuentra registrado</li>
+        </ul>
+      );
+    }
+    return <></>;
+  };
+
+  const MessageErrPassword = (): JSX.Element => {
+    if (isErrPass === 'error') {
+      return (
+        <ul className="list-disc text-xs pl-5">
+          <li>La contraseña debe tener números, minúsculas y mayúsculas</li>
+        </ul>
+      );
+    }
+    return <></>;
+  };
   return (
     <form onSubmit={Submit} className="grid gap-2 mt-6">
       <Field
@@ -117,7 +109,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
         statusErrEmail={isErrEmail}
         onChange={handleErrEmail}
       />
-      <HandleMessageErrEmail />
+      <MessageErrEmail />
       <div className="flex w-full gap-2">
         <Field
           name="first_name"
@@ -144,7 +136,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
         title="Incorrect format"
         onChange={handleErrPassword}
       />
-      <HandleMessageErrorPassword />
+      <MessageErrPassword />
 
       <ButtonForm to="log-in" text="signup" type={type} />
     </form>
