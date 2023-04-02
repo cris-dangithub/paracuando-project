@@ -6,7 +6,7 @@ import { fetcher } from '../lib/helpers/fetcher.helper';
 import { store } from '../lib/store';
 import '../styles/globals.css';
 
-import Init from '../lib/Init';
+import Init from '../components/_Init';
 import { NextPageWithLayout } from './page';
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;

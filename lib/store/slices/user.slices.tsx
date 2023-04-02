@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '..';
-import getConfig from '../../helpers/getConfig';
+import { getConfig } from '../../helpers/getConfig';
 import { getUser } from '../../services/auth.service';
 
 const userSlice = createSlice({

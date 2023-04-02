@@ -1,9 +1,16 @@
 import Cookies from 'js-cookie';
 
-const getConfig = () => ({
-  headers: {
-    Authorization: `Bearer ${Cookies.get('token')}`,
-  },
-});
-
-export default getConfig;
+export const getConfig = (token?: string) => {
+  if (token) {
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  }
+  return {
+    headers: {
+      Authorization: `Bearer ${Cookies.get('token')}`,
+    },
+  };
+};
