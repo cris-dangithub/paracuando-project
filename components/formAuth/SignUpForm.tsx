@@ -7,7 +7,8 @@ import {
 } from '../../lib/helpers/checkers.helper';
 import { ILogin, StatusIcon } from '../../lib/interfaces/auth.interface';
 import { createUser } from '../../lib/services/auth.service';
-import { useAppSelector } from '../../lib/store/hooks';
+import { useAppDispatch } from '../../lib/store/hooks';
+import { goToLoginAccount } from '../../lib/store/slices/popUpAuth.slices';
 import customSwalAlert from '../alerts/swal';
 import ButtonForm from './ButtonForm';
 import Field from './Field';
@@ -23,7 +24,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
   const [errorsForm, setErrorsForm] = useState<any>();
 
   const router = useRouter();
-  const { user } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
   const handleErrEmail = (email: string): boolean => {
     if (errorsForm) setErrorsForm('');
@@ -58,7 +59,9 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
       title: data.results,
       props: { confirmButtonText: 'Login' },
     }).then((response) => {
-      router.push('/log-in');
+      type === 'signUpPopUp'
+        ? dispatch(goToLoginAccount())
+        : router.push('/log-in');
     });
   };
   const errorSubmit = (errResponse: any) => {

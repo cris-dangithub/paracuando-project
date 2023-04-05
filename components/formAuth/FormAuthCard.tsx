@@ -19,18 +19,23 @@ interface IFormAuth {
   type: AuthType;
 }
 
+interface IGenerateForm {
+  type: AuthType;
+}
+
+const GenerateForm: React.FC<IGenerateForm> = ({ type }) => {
+  if (type === 'login') return <LogInForm />;
+  if (type === 'loginPopUp') return <LogInForm type="loginPopUp" />;
+  if (type === 'signup') return <SignUpForm />;
+  if (type === 'signUpPopUp') return <SignUpForm type="signUpPopUp" />;
+  if (type === 'chooseOption') return <ChooseOptionForm />;
+  return <></>;
+};
+
 const FormAuthCard: React.FC<IFormAuth> = ({ title, subtitle, type }) => {
   const router = useRouter();
   const { popUpAuth } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-
-  const generateForm = () => {
-    if (type === 'login') return <LogInForm />;
-    if (type === 'loginPopUp') return <LogInForm type="loginPopUp" />;
-    if (type === 'signup') return <SignUpForm />;
-    if (type === 'signUpPopUp') return <SignUpForm type="signUpPopUp" />;
-    if (type === 'chooseOption') return <ChooseOptionForm />;
-  };
 
   const handleClick = () => {
     if (type === 'login' || type === 'signup') router.push('/');
@@ -61,7 +66,7 @@ const FormAuthCard: React.FC<IFormAuth> = ({ title, subtitle, type }) => {
       </button>
       <h2 className="text-3xl font-semibold">{title}</h2>
       <h3 className="text-sm mt-3">{subtitle}</h3>
-      {generateForm()}
+      <GenerateForm type={type} />
     </div>
   );
 };
