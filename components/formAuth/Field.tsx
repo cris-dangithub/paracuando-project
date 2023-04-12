@@ -13,7 +13,7 @@ import SuccessForm from '../assets/svg/SuccessForm';
 interface IFields {
   type: HTMLInputTypeAttribute;
   name: ValuesForm;
-  label: string;
+  label?: string;
   register: UseFormRegister<ILogin>;
   placeholder?: string;
   dynamicPass?: boolean;
@@ -69,9 +69,12 @@ const Field: React.FC<IFields> = (props) => {
 
   return (
     <div className="flex flex-col gap-1 w-full ">
-      <label htmlFor={name} className="font-semibold text-sm">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={name} className="font-semibold text-sm">
+          {label}
+        </label>
+      )}
+
       <div className="relative">
         <input
           value={inputValue}

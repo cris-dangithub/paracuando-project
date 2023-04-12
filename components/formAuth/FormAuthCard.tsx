@@ -4,6 +4,7 @@ import { toggleVisibility } from '../../lib/store/slices/popUpAuth.slices';
 import CircleXForm from '../assets/svg/CircleXForm';
 import ChooseOptionForm from '../popup/ChooseOptionForm';
 import LogInForm from './LogInForm';
+import RecoverForm from './RecoverForm';
 import SignUpForm from './SignUpForm';
 
 type AuthType =
@@ -11,7 +12,8 @@ type AuthType =
   | 'loginPopUp'
   | 'signup'
   | 'signUpPopUp'
-  | 'chooseOption';
+  | 'chooseOption'
+  | 'recover';
 
 interface IFormAuth {
   title: string;
@@ -19,26 +21,21 @@ interface IFormAuth {
   type: AuthType;
 }
 
-interface IGenerateForm {
-  type: AuthType;
-}
-
-const GenerateForm: React.FC<IGenerateForm> = ({ type }) => {
-  if (type === 'login') return <LogInForm />;
-  if (type === 'loginPopUp') return <LogInForm type="loginPopUp" />;
-  if (type === 'signup') return <SignUpForm />;
-  if (type === 'signUpPopUp') return <SignUpForm type="signUpPopUp" />;
-  if (type === 'chooseOption') return <ChooseOptionForm />;
-  return <></>;
-};
-
 const FormAuthCard: React.FC<IFormAuth> = ({ title, subtitle, type }) => {
+  const forms = {
+    login: <LogInForm />,
+    loginPopUp: <LogInForm type="loginPopUp" />,
+    signup: <SignUpForm />,
+    signUpPopUp: <SignUpForm type="signUpPopUp" />,
+    chooseOption: <ChooseOptionForm />,
+    recover: <RecoverForm />,
+  };
   const router = useRouter();
   const { popUpAuth } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    if (type === 'login' || type === 'signup') router.push('/');
+    if (['login', 'signup', 'recover'].includes(type)) router.push('/');
     if (['loginPopUp', 'signUpPopUp', 'chooseOption'].includes(type)) {
       const newPopUpAuth = { ...popUpAuth };
       newPopUpAuth.isActive = false;
@@ -66,7 +63,8 @@ const FormAuthCard: React.FC<IFormAuth> = ({ title, subtitle, type }) => {
       </button>
       <h2 className="text-3xl font-semibold">{title}</h2>
       <h3 className="text-sm mt-3">{subtitle}</h3>
-      <GenerateForm type={type} />
+      {/* <GenerateForm type={type} /> */}
+      {forms[type]}
     </div>
   );
 };
