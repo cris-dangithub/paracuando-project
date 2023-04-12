@@ -24,6 +24,7 @@ module.exports = {
         'app-grayLight': '#d9d9d9',
         'app-grayLighter': '#f8f7fa',
         'app-red': '#ef3f47',
+        'app-text_form': '#7d7d7d',
       },
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif'],
