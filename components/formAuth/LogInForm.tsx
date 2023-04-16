@@ -57,14 +57,15 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
     if (response.status === 401) setIsErrPass('error');
   };
 
-  const Submit = handleSubmit((data: ILogin) => {
+  const Submit = (data: ILogin) => {
+    console.log(data);
     loginUser(data)
       .then(({ data }) => successSubmit(data))
       .catch(({ response }) => errorSubmit(response));
-  });
+  };
 
   return (
-    <form onSubmit={Submit} className="grid gap-2 mt-6">
+    <form onSubmit={handleSubmit(Submit)} className="grid gap-2 mt-6">
       <Field
         name="email"
         type="email"
