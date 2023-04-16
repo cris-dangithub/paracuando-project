@@ -53,7 +53,6 @@ const Field: React.FC<IFields> = (props) => {
       return <SuccessForm />;
     }
     if (statusErrEmail && inputValue) {
-      console.log(statusErrEmail);
       if (statusErrEmail === 'error') return <ErrorForm title={title} />;
       return <SuccessForm />;
     }

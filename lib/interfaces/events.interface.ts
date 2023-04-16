@@ -1,8 +1,17 @@
 export interface Event {
-  id: number;
+  id: string;
   title: string;
-  short_description: string;
+  description: string;
+  reference_link: string;
+}
+
+export interface PublicationPostRequest extends Event {
+  content: string;
+  publication_type_id: number;
+  tags: any[];
+}
+
+export interface EventCard extends PublicationPostRequest {
+  images: any[];
   votes: number;
-  url: string;
-  image: string;
 }

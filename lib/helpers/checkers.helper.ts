@@ -2,11 +2,8 @@ import { users } from '../data/users.mocks';
 
 export const checkEmail = (email: string) => {
   //* Checkeo de formato (Frontend)
-  console.log(email.trim().split('@'));
-  console.log(email.split('@')[1]);
 
   if (email.trim().split('@').length !== 2 || !email.split('@')[1]) {
-    console.log('entra en el primer if');
     return false;
   }
 

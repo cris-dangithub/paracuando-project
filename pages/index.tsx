@@ -3,22 +3,23 @@ import Logo from '../components/assets/logo/Logo';
 import { Layout } from '../components/layout/Layout';
 import PopUp from '../components/popup/PopUp';
 import { EventSlider } from '../components/sliders/EventSlider/EventSlider';
-import { eventsMock } from '../lib/data/events.mock';
 import { useAppSelector } from '../lib/store/hooks';
 
 import { usePublications } from '../lib/services/publications.services';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
-  const { popUpAuth } = useAppSelector((state) => state);
-  console.log(popUpAuth);
+  const { popUpAuth, user } = useAppSelector((state) => state);
+
   //const { data, error, isLoading } = useCategories();
-  const { data, error, isLoading, mutate } = usePublications();
-  if (isLoading) {
+  const { errPublications, loaderPublications, mutPublications, publications } =
+    usePublications();
+
+  console.log(publications?.results.results);
+
+  if (loaderPublications) {
     return <div>Cargando...</div>;
   }
-
-  console.log({ data, error, isLoading });
 
   return (
     <div>
@@ -64,12 +65,12 @@ const Home: NextPageWithLayout = () => {
           </div>
         </div>
       </div>
-      {/* CONTENIDO */}
+      {/* POPULARS */}
       <div className=" bg-white flex flex-col mt-4 gap-3">
         <EventSlider
           title={'Populares en Querétaro'}
           subtitle={'Lo que las personas piden más'}
-          events={eventsMock}
+          events={publications?.results.results}
         />
       </div>
       {/* SUGGESTION */}
@@ -77,7 +78,7 @@ const Home: NextPageWithLayout = () => {
         <EventSlider
           title={'Sugerencias para ti'}
           subtitle={' Publicaciones que podrías colaborar'}
-          events={eventsMock}
+          events={publications?.results.results}
         />
       </div>
       {/* BUTTONS CUADRO*/}
@@ -128,7 +129,7 @@ const Home: NextPageWithLayout = () => {
         <EventSlider
           title={'Recientes'}
           subtitle={'Las personas últimamente están hablando de esto'}
-          events={eventsMock}
+          events={publications?.results.results}
         />
       </div>
     </div>

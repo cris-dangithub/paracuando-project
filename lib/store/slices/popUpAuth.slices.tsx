@@ -17,15 +17,12 @@ const popUpAuthSlice = createSlice({
     toggleVisibility: (state) => {
       state.isActive = !state.isActive;
       if (state.type !== 'chooseOption') state.type = 'chooseOption';
-      return state;
     },
     goToCreateAccount: (state) => {
       state.type = 'signUpPopUp';
-      return state;
     },
     goToLoginAccount: (state) => {
       state.type = 'loginPopUp';
-      return state;
     },
   },
 });
