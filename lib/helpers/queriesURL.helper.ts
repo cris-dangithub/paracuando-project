@@ -1,4 +1,4 @@
-import { GetTags } from '../interfaces/categories.interface';
+import { GetTags } from '../interfaces/tags.interface';
 import { GetUsers } from '../interfaces/user.interface';
 type Type = GetUsers | GetTags;
 
