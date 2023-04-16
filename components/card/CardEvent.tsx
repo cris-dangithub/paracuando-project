@@ -38,10 +38,6 @@ const CardEvent: React.FC<IEventCard> = ({ event }) => {
   };
 
   const showImage = () => {
-    //console.log(event.images?.[0] ? event.images[0] : '/lady-gaga.png');
-    console.log(
-      event.images?.[0] ? event.images[0].image_url : '/lady-gaga.png'
-    );
     return event.images?.[0] ? event.images[0].image_url : '/lady-gaga.png';
   };
 
