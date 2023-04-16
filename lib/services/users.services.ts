@@ -1,19 +1,11 @@
 import useSWR from 'swr';
 import axios from '../helpers/axios.helper.';
 import { fetcher } from '../helpers/fetcher.helper';
+import { getURLQueries } from '../helpers/queriesURL.helper';
 import { GetUsers, UpdateUser } from '../interfaces/user.interface';
 
 const useGetUsers = (dataQueries: GetUsers) => {
-  let queries = '?';
-  let counter = 0;
-  for (const query in dataQueries) {
-    if (counter) {
-      queries += `&${query}=${dataQueries[query as keyof GetUsers]}`;
-      continue;
-    }
-    queries += `${query}=${dataQueries[query as keyof GetUsers]}`;
-    counter += 1;
-  }
+  const queries = getURLQueries(dataQueries);
   const { data, error, isLoading, mutate } = useSWR(
     `/users/${queries}`,
     fetcher
