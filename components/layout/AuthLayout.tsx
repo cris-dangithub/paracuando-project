@@ -11,7 +11,11 @@ interface IAuthLayout {
 const AuthLayout: React.FC<IAuthLayout> = ({ children, noLogo = false }) => {
   const router = useRouter();
   return (
-    <div className="flex flex-col min-h-screen relative px-5 pt-11 pb-5 gap-5 md:flex-row md:items-center md:justify-center">
+    <div
+      className={`flex flex-col min-h-screen relative px-5 pt-11 pb-5 gap-5 md:flex-row md:items-center md:justify-center ${
+        noLogo ? 'justify-center' : ''
+      }`}
+    >
       <div className="absolute top-0 left-0 bottom-0 right-0 z-0">
         <Image
           src="/bg-auth.jpeg"
@@ -23,7 +27,7 @@ const AuthLayout: React.FC<IAuthLayout> = ({ children, noLogo = false }) => {
       </div>
       <section
         className={`flex items-center justify-center z-10 md:w-1/2 ${
-          !noLogo ? '' : 'hidden'
+          noLogo ? 'hidden' : ''
         }`}
       >
         <div
@@ -33,7 +37,7 @@ const AuthLayout: React.FC<IAuthLayout> = ({ children, noLogo = false }) => {
           <Logo variant="yellow" className="w-full cursor-pointer" />
         </div>
       </section>
-      <main className=" flex justify-center z-10 md:w-1/2 ">
+      <main className={`flex justify-center z-10 md:w-1/2`}>
         {/* w-1/2 */} {children}
       </main>
     </div>

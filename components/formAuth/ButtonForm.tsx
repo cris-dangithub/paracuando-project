@@ -7,9 +7,15 @@ import {
 import Spinner from '../loaders/Spinner';
 
 interface AuthRoutes {
-  to: 'sign-up' | 'log-in';
-  text: 'signup' | 'login';
-  type?: 'login' | 'signup' | 'loginPopUp' | 'signUpPopUp' | 'chooseOption';
+  to?: 'sign-up' | 'log-in';
+  text: 'signup' | 'login' | 'recover';
+  type:
+    | 'login'
+    | 'signup'
+    | 'loginPopUp'
+    | 'signUpPopUp'
+    | 'chooseOption'
+    | 'recover';
   isLogging?: boolean;
 }
 
@@ -19,10 +25,12 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
   const textBtn = {
     signup: 'Crear cuenta',
     login: 'Iniciar sesión',
+    recover: 'Enviar correo de reestablecimiento de contraseña',
   };
   const textAnchor = {
     signup: 'O inicia sesión',
     login: 'O crea una cuenta aquí',
+    recover: 'O volver a iniciar sesión',
   };
   const btnChooseOptions: React.ButtonHTMLAttributes<HTMLButtonElement> = {
     type: 'button',
@@ -32,7 +40,7 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
   return (
     <div
       className={`flex flex-col gap-4 text-center items-center ${
-        type === 'chooseOption' ? 'mt-14' : 'mt-4'
+        ['chooseOption', 'recover'].includes(type) ? 'mt-14' : 'mt-4'
       }`}
     >
       <button
@@ -45,7 +53,7 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
         </div>
       </button>
 
-      {type === 'login' || type === 'signup' ? (
+      {['login', 'signup', 'recover'].includes(type) ? (
         <Link
           href={`/${to}`}
           className="border-b-[1px] border-app-yellow text-app-yellow text-sm leading-4"
@@ -59,7 +67,7 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
           }}
           className="border-b-[1px] border-app-yellow text-app-yellow text-sm leading-4 cursor-pointer"
         >
-          {textAnchor[text]}
+          {textAnchor['login']}
         </span>
       ) : (
         <span
@@ -68,7 +76,7 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
           }}
           className="border-b-[1px] border-app-yellow text-app-yellow text-sm leading-4 cursor-pointer"
         >
-          {textAnchor[text]}
+          {textAnchor['signup']}
         </span>
       )}
     </div>

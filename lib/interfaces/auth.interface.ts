@@ -8,3 +8,7 @@ export interface ILogin {
   first_name: string;
   last_name: string;
 }
+
+export interface IRecover {
+  email: string;
+}
