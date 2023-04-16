@@ -1,8 +1,8 @@
-export const eventsMock = [
+export const eventsMocks = [
   {
     id: 1,
     title: 'Concierto de Lady Gaga',
-    short_description:
+    description:
       'El concierto con la temática de Lady gaga en Las Vegas. El concierto con la temática de Lady gaga en Las Vegas.El concierto con la temática.',
     votes: 99.203,
     url: 'https://ladygaga.com',

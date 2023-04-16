@@ -15,4 +15,18 @@ const getUser = (headers: any) => {
   return axios.get(`${BASE_URL}/auth/me`, headers);
 };
 
-export { createUser, loginUser, getUser };
+const changePasswordPetition = (email: string) => {
+  return axios.post(`${BASE_URL}/auth/forget-password`, email);
+};
+
+const changePassword = (headers: any, password: string) => {
+  return axios.post(`${BASE_URL}/auth/change-password`, password, headers);
+};
+
+export {
+  createUser,
+  loginUser,
+  getUser,
+  changePasswordPetition,
+  changePassword,
+};

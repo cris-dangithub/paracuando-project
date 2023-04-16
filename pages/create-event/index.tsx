@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -27,7 +26,6 @@ const CreateEventPage = () => {
   });
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
     setStep(false);
     setDataEvent(data);
   };
@@ -153,4 +151,3 @@ const CreateEventPage = () => {
   );
 };
 export default CreateEventPage;
-

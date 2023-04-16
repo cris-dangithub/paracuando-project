@@ -28,7 +28,6 @@ const ButtonForm: React.FC<AuthRoutes> = ({ to, text, type, isLogging }) => {
     type: 'button',
     onClick: () => dispatch(goToCreateAccount()),
   };
-  console.log(type);
 
   return (
     <div

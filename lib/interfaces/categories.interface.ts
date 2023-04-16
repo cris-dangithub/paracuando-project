@@ -18,10 +18,13 @@ export interface Results {
   results: Category[];
 }
 
-export interface Category {
-  id: string;
+export interface CategoryPutRequest {
   name: string;
   description: string;
+}
+
+export interface Category extends CategoryPutRequest {
+  id: string;
   created_at: string;
   updated_at: string;
 }

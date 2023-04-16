@@ -7,7 +7,7 @@ import CardEvent from '../../card/CardEvent';
 interface IEventSlider {
   title?: string;
   subtitle?: string;
-  events: Event[];
+  events: EventCard[];
 }
 
 export const EventSlider: React.FC<IEventSlider> = ({
@@ -65,7 +65,7 @@ export const EventSlider: React.FC<IEventSlider> = ({
 
 // some-inner-component.jsx
 import { useSwiper } from 'swiper/react';
-import { Event } from '../../../lib/interfaces/events.interface';
+import { EventCard } from '../../../lib/interfaces/events.interface';
 
 interface ISlideNextButton {
   className?: string;

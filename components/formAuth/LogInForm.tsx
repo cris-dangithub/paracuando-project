@@ -45,7 +45,6 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
     setIsErrEmail('success');
     setIsErrPass('success');
     setIsLogging(true);
-    console.log(data);
     Cookies.set('token', data.token);
     dispatch(getGlobalUser());
     setTimeout(() => {
@@ -54,7 +53,6 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
     }, 1500);
   };
   const errorSubmit = (response: any) => {
-    console.log(response);
     response.status === 404 ? setIsErrEmail('error') : setIsErrEmail('');
     if (response.status === 401) setIsErrPass('error');
   };

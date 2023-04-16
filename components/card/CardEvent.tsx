@@ -3,18 +3,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { Event } from '../../lib/interfaces/events.interface';
+import { EventCard } from '../../lib/interfaces/events.interface';
 import { useAppDispatch, useAppSelector } from '../../lib/store/hooks';
 import { toggleVisibility } from '../../lib/store/slices/popUpAuth.slices';
 import { setUserGlobal } from '../../lib/store/slices/user.slices';
 import { Heart } from '../assets/svg/Heart';
 import VotesIconCard from '../assets/svg/VotesIconCard';
 
-interface EventCard {
-  event: Event;
+interface IEventCard {
+  event: EventCard;
 }
 
-const CardEvent: React.FC<EventCard> = ({ event }) => {
+const CardEvent: React.FC<IEventCard> = ({ event }) => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -37,6 +37,14 @@ const CardEvent: React.FC<EventCard> = ({ event }) => {
     router.push(`/details/${event.id}`);
   };
 
+  const showImage = () => {
+    //console.log(event.images?.[0] ? event.images[0] : '/lady-gaga.png');
+    console.log(
+      event.images?.[0] ? event.images[0].image_url : '/lady-gaga.png'
+    );
+    return event.images?.[0] ? event.images[0].image_url : '/lady-gaga.png';
+  };
+
   return (
     <div
       onClick={handleDetails}
@@ -49,7 +57,7 @@ const CardEvent: React.FC<EventCard> = ({ event }) => {
       <div className="w-full h-60 flex justify-center items-center">
         {isLoading ? (
           <Image
-            src={event.image}
+            src={showImage()}
             alt="imagen"
             width="300"
             height="300"
@@ -65,17 +73,24 @@ const CardEvent: React.FC<EventCard> = ({ event }) => {
             {event.title}
           </h2>
           <p className="text-[14.5px] leading-[18px] text-app-grayDark">
-            {event.short_description}
+            {event.description}
           </p>
           <div className="absolute w-full h-full top-0 right-0 text-gradient"></div>
         </div>
+
         <Link
-          href={event.url}
+          href={
+            event.reference_link ? event.reference_link : `/details/${event.id}`
+          }
           target="_blank"
           className="mt-1 font-medium text-app-blue"
+          onClick={(e) => e.stopPropagation()}
         >
-          {event.url.replace('https://', '')}
+          {event.reference_link
+            ? event.reference_link.replace('https://', '')
+            : 'Más detalles...'}
         </Link>
+
         <span className="flex gap-2 mt-3">
           <VotesIconCard /> {event.votes} votes
         </span>
