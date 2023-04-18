@@ -5,7 +5,7 @@ import ButtonForm from './ButtonForm';
 import Field from './Field';
 
 const RecoverForm = () => {
-  const { register, handleSubmit, reset } = useForm<ILogin>({
+  const { register, handleSubmit, reset, watch } = useForm<ILogin>({
     defaultValues: {
       email: '',
     },
@@ -24,6 +24,7 @@ const RecoverForm = () => {
         name="email"
         register={register}
         placeholder="example@mail.com"
+        watch={watch}
       />
       <ButtonForm to="log-in" text="recover" type="recover" />
     </form>

@@ -1,5 +1,5 @@
 import React, { HTMLInputTypeAttribute, useEffect, useState } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import {
   ILogin,
   StatusIcon,
@@ -15,6 +15,7 @@ interface IFields {
   name: ValuesForm;
   label?: string;
   register: UseFormRegister<ILogin>;
+  watch: UseFormWatch<ILogin>;
   placeholder?: string;
   dynamicPass?: boolean;
   statusErrPass?: StatusIcon;
@@ -29,6 +30,7 @@ const Field: React.FC<IFields> = (props) => {
     name,
     label,
     register,
+    watch,
     placeholder,
     dynamicPass,
     statusErrPass,
@@ -40,7 +42,8 @@ const Field: React.FC<IFields> = (props) => {
   const [dynamicType, setDynamicType] =
     useState<HTMLInputTypeAttribute>('password');
 
-  const [inputValue, setInputValue] = useState<string>('');
+  //const [inputValue, setInputValue] = useState<string>('');
+  const inputValue = watch(`${name}`);
 
   const showPassword = () => {
     if (dynamicType === 'password') return setDynamicType('text');
@@ -58,9 +61,9 @@ const Field: React.FC<IFields> = (props) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /* const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-  };
+  }; */
 
   useEffect(() => {
     if (onChange) onChange(inputValue);
@@ -76,13 +79,11 @@ const Field: React.FC<IFields> = (props) => {
 
       <div className="relative">
         <input
-          value={inputValue}
           type={dynamicPass ? dynamicType : type}
           id={name}
           {...register(`${name}`)}
           placeholder={placeholder}
           className="w-full p-4 bg-transparent border-2 border-app-grayLight rounded-lg autofill:bg-transparent"
-          onChange={handleChange}
           required
         />
         <div className="absolute top-0 right-5 bottom-0 flex items-center gap-2">

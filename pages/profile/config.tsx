@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, useForm } from 'react-hook-form';
 import Plus from '../../components/assets/svg/Plus';
 import CategoryCard from '../../components/categories/CategoryCard';
 import { ConfigLayout } from '../../components/layout/ConfigLayout';
@@ -158,7 +158,10 @@ const ConfigPage: NextPageWithLayout = () => {
               ))}
           </div>
         </section>
-        <button className="mt-10 mb-20 self-center py-3 px-6 bg-app-blue text-white font-semibold rounded-full">
+        <button
+          type="submit"
+          className="mt-10 mb-20 self-center py-3 px-6 bg-app-blue text-white font-semibold rounded-full"
+        >
           Guardar cambios
         </button>
       </form>

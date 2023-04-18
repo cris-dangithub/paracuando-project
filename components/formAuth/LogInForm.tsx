@@ -16,7 +16,7 @@ interface ILoginForm {
 }
 
 const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
-  const { handleSubmit, register } = useForm<ILogin>();
+  const { handleSubmit, register, watch } = useForm<ILogin>();
   const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
   const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');
   const [isLogging, setIsLogging] = useState<boolean>(false);
@@ -71,6 +71,7 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
         type="email"
         label="Email"
         register={register}
+        watch={watch}
         placeholder="ejemplo@mail.com"
         statusErrEmail={isErrEmail}
       />
@@ -80,6 +81,7 @@ const LogInForm: React.FC<ILoginForm> = ({ type = 'login' }) => {
         type="password"
         label="Contraseña"
         register={register}
+        watch={watch}
         dynamicPass
       />
       <ul className="list-disc text-xs pl-5 md:list-none md:pl-0 md:text-center md:text-sm">

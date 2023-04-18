@@ -18,7 +18,7 @@ interface ISignUpForm {
 }
 
 const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
-  const { handleSubmit, register } = useForm<ILogin>();
+  const { handleSubmit, register, watch } = useForm<ILogin>();
   const [isErrPass, setIsErrPass] = useState<StatusIcon>('');
   const [isErrEmail, setIsErrEmail] = useState<StatusIcon>('');
   const [errorsForm, setErrorsForm] = useState<any>();
@@ -114,6 +114,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
         placeholder="ejemplo@mail.com"
         statusErrEmail={isErrEmail}
         onChange={handleErrEmail}
+        watch={watch}
       />
       <MessageErrEmail />
       <div className="flex w-full gap-2">
@@ -123,6 +124,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
           label="Nombre"
           register={register}
           placeholder="Erik"
+          watch={watch}
         />
         <Field
           name="last_name"
@@ -130,6 +132,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
           label="Apellido"
           register={register}
           placeholder="Perez"
+          watch={watch}
         />
       </div>
       <Field
@@ -141,6 +144,7 @@ const SignUpForm: React.FC<ISignUpForm> = ({ type = 'signup' }) => {
         statusErrPass={isErrPass}
         title="Incorrect format"
         onChange={handleErrPassword}
+        watch={watch}
       />
       <MessageErrPassword />
 
