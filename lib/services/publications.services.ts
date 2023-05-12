@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import { FormValues } from '../../pages/create-event';
 import axios from '../helpers/axios.helper.';
 import { fetcher } from '../helpers/fetcher.helper';
 
@@ -12,7 +13,7 @@ const usePublications = () => {
   };
 };
 
-const addPubliction = (data: any) => {
+const addPubliction = (data: FormValues) => {
   return axios.post(`/publications`, data);
 };
 

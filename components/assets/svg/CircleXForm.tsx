@@ -1,4 +1,4 @@
-const CircleXForm = () => {
+const CircleXForm = ({ className = '' }) => {
   return (
     <svg
       width="33"
@@ -6,6 +6,7 @@ const CircleXForm = () => {
       viewBox="0 0 33 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M22.4342 9.10742L16.7776 14.764L11.121 9.10742L9.6626 10.5658L15.3193 16.2224L9.6626 21.8791L11.121 23.3374L16.7776 17.6808L22.4342 23.3374L23.8927 21.8791L18.236 16.2224L23.8927 10.5658L22.4342 9.10742Z"
