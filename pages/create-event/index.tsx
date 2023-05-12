@@ -148,7 +148,7 @@ const CreateEventPage = () => {
         props: {
           text: `Imagenes añadidas a la publicación: ${resImg.data.results.imagesUploaded.length}`,
         },
-      });
+      }).then(() => router.push('/'));
     } catch (err) {
       console.log(err);
       if ((err as any).response?.data?.message) {
