@@ -37,7 +37,6 @@ const CreateEventPage = () => {
   const inputElement = useRef<HTMLInputElement>(null);
   function handleChange() {
     const files = inputElement.current?.files;
-    console.log(files);
     // Contar espacios disponibles en imageSrc
     let maxFiles = 0;
     imageSrc.forEach((img) => {
@@ -65,7 +64,6 @@ const CreateEventPage = () => {
     setImageSrc(newImageSrc);
     setImages(newImages);
   }
-  console.log(images);
 
   // !!!!!!!!!!!!!!!!!!!!!! COMPONENTE LOCAL
   const ImageField: React.FC<ImageField> = ({
@@ -79,7 +77,6 @@ const CreateEventPage = () => {
   }) => {
     function handleButtonClick() {
       if (!imgSrc) {
-        console.log(inputElement);
         inputElement.current?.click();
         return;
       }
@@ -132,13 +129,11 @@ const CreateEventPage = () => {
     },
   });
   const onSubmit = async (dataForm: FormValues) => {
-    console.log(dataForm);
     try {
       // Agregar "content" a data
       dataForm.content = '';
       // Agregar publicación (servicio)
       const { data } = await addPubliction(dataForm);
-      console.log(data.results);
       const { id } = data.results;
       const formData = new FormData();
       images.forEach((image) => {
@@ -146,7 +141,6 @@ const CreateEventPage = () => {
       });
       // Agregar imagen a la publicación (servicio)
       const resImg = await addImagePublication(id, formData);
-      console.log(resImg);
       // Alerta que diga que la publicación ha sido creada exitosamente, y luego volver al inicio
       customSwalAlert({
         icon: 'success',
@@ -174,7 +168,6 @@ const CreateEventPage = () => {
     step ? router.back() : setStep(true);
   };
   const nextStep = handleSubmit((data) => {
-    console.log(data);
     const fieldNames: FormValues = {
       title: 'Titulo de publicación',
       publication_type_id: 'Tipo',
@@ -189,7 +182,6 @@ const CreateEventPage = () => {
       if (['reference_link'].includes(field)) continue;
       if (!valueField) errors.push(fieldNames[field as keyof FormValues]);
     }
-    console.log(errors);
     if (errors.length) {
       customSwalAlert({
         icon: 'warning',
