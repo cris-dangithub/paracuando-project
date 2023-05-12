@@ -30,6 +30,58 @@ interface ImageField {
   setImageSrc: Dispatch<SetStateAction<string[]>>;
   setImages: Dispatch<SetStateAction<(string | File)[]>>;
 }
+const ImageField: React.FC<ImageField> = ({
+  imgSrc,
+  idx,
+  inputElement,
+  imageSrc,
+  images,
+  setImageSrc,
+  setImages,
+}) => {
+  function handleButtonClick() {
+    if (!imgSrc) {
+      inputElement.current?.click();
+      return;
+    }
+    deleteImage();
+  }
+  function deleteImage() {
+    const newImageSrc = [...imageSrc];
+    const newImages = [...images];
+    newImageSrc.splice(idx, 1);
+    newImages.splice(idx, 1);
+    newImageSrc.push('');
+    newImages.push('');
+    setImageSrc(newImageSrc);
+    setImages(newImages);
+  }
+  return (
+    <button onClick={handleButtonClick} type="button">
+      <div className="flex justify-center items-center h-[123px] w-[106px] bg-app-grayLight relative">
+        {imgSrc ? (
+          <>
+            <Image
+              width={150}
+              height={100}
+              alt="image"
+              className="w-full h-full object-cover"
+              src={imgSrc}
+            />
+            <div
+              className="images-delete-container absolute w-full h-full bg-black/0 flex justify-center items-center hover:bg-black/25 ease-in duration-100"
+              onClick={deleteImage}
+            >
+              <CircleXForm className="images-delete-btn translate-y-8 duration-100 opacity-0" />
+            </div>
+          </>
+        ) : (
+          <Plus />
+        )}
+      </div>
+    </button>
+  );
+};
 const CreateEventPage = () => {
   const [step, setStep] = useState<boolean>(true);
   const [imageSrc, setImageSrc] = useState<string[]>(['', '', '']);
@@ -64,60 +116,6 @@ const CreateEventPage = () => {
     setImageSrc(newImageSrc);
     setImages(newImages);
   }
-
-  // !!!!!!!!!!!!!!!!!!!!!! COMPONENTE LOCAL
-  const ImageField: React.FC<ImageField> = ({
-    imgSrc,
-    idx,
-    inputElement,
-    imageSrc,
-    images,
-    setImageSrc,
-    setImages,
-  }) => {
-    function handleButtonClick() {
-      if (!imgSrc) {
-        inputElement.current?.click();
-        return;
-      }
-      deleteImage();
-    }
-    function deleteImage() {
-      const newImageSrc = [...imageSrc];
-      const newImages = [...images];
-      newImageSrc.splice(idx, 1);
-      newImages.splice(idx, 1);
-      newImageSrc.push('');
-      newImages.push('');
-      setImageSrc(newImageSrc);
-      setImages(newImages);
-    }
-    return (
-      <button onClick={handleButtonClick} type="button">
-        <div className="flex justify-center items-center h-[123px] w-[106px] bg-app-grayLight relative">
-          {imgSrc ? (
-            <>
-              <Image
-                width={150}
-                height={100}
-                alt="image"
-                className="w-full h-full object-cover"
-                src={imgSrc}
-              />
-              <div
-                className="images-delete-container absolute w-full h-full bg-black/0 flex justify-center items-center hover:bg-black/25 ease-in duration-100"
-                onClick={deleteImage}
-              >
-                <CircleXForm className="images-delete-btn translate-y-8 duration-100 opacity-0" />
-              </div>
-            </>
-          ) : (
-            <Plus />
-          )}
-        </div>
-      </button>
-    );
-  };
 
   const { register, handleSubmit, watch } = useForm<FormValues>({
     defaultValues: {
