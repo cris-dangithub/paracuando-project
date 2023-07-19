@@ -82,6 +82,7 @@ const ImageField: React.FC<ImageField> = ({
     </button>
   );
 };
+
 const CreateEventPage = () => {
   const [step, setStep] = useState<boolean>(true);
   const [imageSrc, setImageSrc] = useState<string[]>(['', '', '']);
