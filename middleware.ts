@@ -11,6 +11,7 @@ export async function middleware(request: NextRequest) {
   if (!jwt) {
     return NextResponse.redirect(new URL('/log-in', request.url));
   }
+
   return response;
 }
 
